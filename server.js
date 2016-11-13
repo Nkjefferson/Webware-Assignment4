@@ -88,6 +88,10 @@ function sendIndex(res, list) {
   html = html + '<input type="Search" placeholder="Search..." name="search" />'
   html = html + '<button class="btn btn-default" type="TODO"><i class="fa fa-search" ></i></button>'
   html = html + '</form>'
+  html = html + '<form action="submit" name="add" method="POST">'
+  html = html + '<input type="Append" placeholder="Add a Move Title?" name="Add" />'
+  html = html + '<button class="btn btn-default" type="submit"><i class="fa fa-plus" ></i></button>'
+  html = html + '</form>'
   html = html + '</div>'
   html = html + '</div>'
 
