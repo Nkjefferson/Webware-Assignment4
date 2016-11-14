@@ -2,12 +2,43 @@ var http = require('http')
   , fs   = require('fs')
   , url  = require('url')
   , port = 8080
+  , qs = require('querystring')
 
 // Add more movies! (For a technical challenge, use a file, or even an API!)
-var movies = ['Jaws', 'Jaws 2', 'Jaws 3', 'Doctor Strange', 'Space Jam', 'The Illusionist']
+
+  var movies;
 
 var server = http.createServer (function (req, res) {
   var uri = url.parse(req.url)
+
+  movies = 
+    fs.readFileSync('movies.txt','utf8')
+    .toString()
+    .trim()
+    .split("\n");
+  var p ='';
+  req.on('data',function(c){
+      p = p+c
+  })
+  req.on('end',function(){
+      if(p !=''){
+          var q = qs.parse(p)
+        if(q.add){
+          movies.push(q.add)
+          fs.writeFileSync('movies.txt', movies.sort().join('\n'))
+          console.log(q.add)
+        }
+        if(q.del){
+          var index = movies.indexOf(q.del);
+          if (index >= 0) {
+                movies.splice( index, 1 );
+          }
+          fs.writeFileSync('movies.txt', movies.sort().join('\n'))
+          console.log(q.del)
+        }
+      }
+      
+  })
 
   switch( uri.pathname ) {
     // Note the new case handling search
@@ -84,19 +115,23 @@ function sendIndex(res, list) {
   // Here's where we build the form YOU HAVE STUFF TO CHANGE HERE
 
   html = html + '<div class="input-group">'
-  html = html + '<form action="search" name="myform" method="TODO">'
+  html = html + '<form action="search" name="myform" method="get">'
   html = html + '<input type="Search" placeholder="Search..." name="search" />'
   html = html + '<button class="btn btn-default" type="TODO"><i class="fa fa-search" ></i></button>'
   html = html + '</form>'
-  html = html + '<form action="submit" name="add" method="POST">'
-  html = html + '<input type="Append" placeholder="Add a Move Title?" name="Add" />'
+  html = html + '<form name="addForm" method="post">'
+  html = html + '<input type="Append" placeholder="Add a Move Title?" name="add" />'
+  html = html + '<button class="btn btn-default" type="submit"><i class="fa fa-plus" ></i></button>'
+  html = html + '</form>'
+  html = html + '<form name="remForm" method="post">'
+  html = html + '<input type="Removal" placeholder="Remove a Move Title?" name="del" />'
   html = html + '<button class="btn btn-default" type="submit"><i class="fa fa-plus" ></i></button>'
   html = html + '</form>'
   html = html + '</div>'
   html = html + '</div>'
 
   html = html + '<div class="element">'
-  html = html + '<ul>'
+  html = html + '<div class="container">'
   // Note: the next line is fairly complex. 
   // You don't need to understand it to complete the assignment,
   // but the `map` function and `join` functions are VERY useful for working
@@ -105,7 +140,7 @@ function sendIndex(res, list) {
   //
   // For a challenge, try rewriting this function to take the filtered movies list as a parameter, to avoid changing to a page that lists only movies.
   html = html + getList(list)
-  html = html + '</ul>'
+  html = html + '</div>'
   html = html + '</div>'
   html = html + '</div>'
 
@@ -128,7 +163,7 @@ function sendFile(res, filename, contentType) {
 
 function getList(arrName){
 
-    return '<ul class="list-group">' + arrName.map(function(d) { return '<li class="list-group-item">'+d+'</li>' }).join(' ') + '</ul>'
+    return '<div class="list-group">' + arrName.map(function(d) { return '<a href="#" class="list-group-item">'+d+'<span class="del"><i class="fa fa-times" aria-hidden="true"></i></span></a>' }).join(' ') + '</div>'
 
 
 
