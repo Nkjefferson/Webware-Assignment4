@@ -16,6 +16,16 @@ body, html
     font-size:2rem;
     text-align:right;
     float:right;
+    margin-top:0;
+}
+
+.list-group-item{
+    padding-bottom:15px;
+}
+
+.list-group-item form{
+
+    display:inline;
 }
 
 .element {

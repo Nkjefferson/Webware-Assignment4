@@ -28,13 +28,13 @@ var server = http.createServer (function (req, res) {
           fs.writeFileSync('movies.txt', movies.sort().join('\n'))
           console.log(q.add)
         }
-        if(q.del){
-          var index = movies.indexOf(q.del);
+        if(q.rem){
+          var index = movies.indexOf(q.rem);
           if (index >= 0) {
                 movies.splice( index, 1 );
           }
           fs.writeFileSync('movies.txt', movies.sort().join('\n'))
-          console.log(q.del)
+          console.log(q.rem)
         }
       }
       
@@ -123,10 +123,6 @@ function sendIndex(res, list) {
   html = html + '<input type="Append" placeholder="Add a Move Title?" name="add" />'
   html = html + '<button class="btn btn-default" type="submit"><i class="fa fa-plus" ></i></button>'
   html = html + '</form>'
-  html = html + '<form name="remForm" method="post">'
-  html = html + '<input type="Removal" placeholder="Remove a Move Title?" name="del" />'
-  html = html + '<button class="btn btn-default" type="submit"><i class="fa fa-plus" ></i></button>'
-  html = html + '</form>'
   html = html + '</div>'
   html = html + '</div>'
 
@@ -163,7 +159,7 @@ function sendFile(res, filename, contentType) {
 
 function getList(arrName){
 
-    return '<div class="list-group">' + arrName.map(function(d) { return '<a href="#" class="list-group-item">'+d+'<span class="del"><i class="fa fa-times" aria-hidden="true"></i></span></a>' }).join(' ') + '</div>'
+    return '<div class="list-group">' + arrName.map(function(d) { return '<a href="#" class="list-group-item">'+d+'<form name="remform" method="post"><span class="del"><button class="btn btn-default" value="' + d + '" name="rem"><i class="fa fa-times" aria-hidden="true"></i></span></button></form></a>' }).join(' ') + '</div>'
 
 
 
