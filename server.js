@@ -7,7 +7,6 @@ var http = require('http')
 // Add more movies! (For a technical challenge, use a file, or even an API!)
 
   var movies
-  var test = ["hello", "test"]
 
 var server = http.createServer (function (req, res) {
   var uri = url.parse(req.url)
@@ -26,7 +25,6 @@ var server = http.createServer (function (req, res) {
           var q = qs.parse(p)
         if(q.add){
           movies.push(q.add)
-          fs.writeFileSync('movies.txt', movies.sort().join('\n'))
           console.log(q.add)
         }
         if(q.rem){
@@ -34,11 +32,11 @@ var server = http.createServer (function (req, res) {
           if (index >= 0) {
                 movies.splice( index, 1 )
           }
-          fs.writeFileSync('movies.txt', movies.sort().join('\n'))
           console.log(q.rem)
         }
         p = ''
-        sendIndex(res, test)
+        fs.writeFileSync('movies.txt', movies.sort().join('\n'))
+        return sendIndex(res, movies)
       }
       
   })
@@ -137,7 +135,6 @@ function sendIndex(res, list) {
   // with arrays, so I encourage you to tinker with the line below
   // and read up on the functions it uses.
   //
-        console.log(movies)
   // For a challenge, try rewriting this function to take the filtered movies list as a parameter, to avoid changing to a page that lists only movies.
   html = html + getList(list)
   html = html + '</div>'
@@ -147,6 +144,7 @@ function sendIndex(res, list) {
   html = html + '</body>'
   html = html + '</html>'
   
+  console.log(html)
   res.writeHead(200, {'Content-type': contentType})
   res.end(html, 'utf-8')
 }
@@ -162,6 +160,7 @@ function sendFile(res, filename, contentType) {
 }
 
 function getList(arrName){
+        console.log(arrName)
 
     return '<div class="list-group">' + arrName.map(function(d) { return '<a href="#" class="list-group-item">'+d+'<form name="remform" method="post"><span class="del"><button class="btn btn-default" value="' + d + '" name="rem"><i class="fa fa-times" aria-hidden="true"></i></span></button></form></a>' }).join(' ') + '</div>'
 
