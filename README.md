@@ -1,7 +1,6 @@
-Assignment 3 - Filters
+Assignment 4 - Persistence
 ===
 
 Achievements
 
-My technical achievement is a css animation to make the quiery results stretch out to add a visually pleasing effect to this search.
-I hav also made the search box auto target so that it is easier to do multiple search quieries in a row with a search that is not case sensitive.
+My techincal achievements for this assignment include, maintianing a functioning search with the ability to preform quick queries without having to refocus the search box. I also redesigned the table so that it would highlight as the user scrolled down it. This makes it easier to match the post BUTTON that I have for each entry to save the user time from having to enter in the name of the movie correctly. I also deployed this app on heroku using github so that I can take this website open source if I would like to.

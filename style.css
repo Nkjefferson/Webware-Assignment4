@@ -2,14 +2,18 @@
 body, html
 {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  background-color:wheat;
+  background-color:#0087F9;
   height:100%
 }
 
 
 
 .jumbotron {
+    background-image:url(http://orig03.deviantart.net/4cdc/f/2012/089/6/b/phazon_animation_by_zlaydedragon-d4uhacn.gif);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     margin-top:3rem;
+    color:white;
 }
 
 .del{
