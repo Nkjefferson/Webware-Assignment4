@@ -16,6 +16,11 @@ body, html
     color:white;
 }
 
+.jumbotron form{
+    color:black;
+
+}
+
 .del{
     font-size:2rem;
     text-align:right;
