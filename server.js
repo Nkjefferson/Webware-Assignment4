@@ -54,5 +54,5 @@ var serveIndex = function(classes, res){
   res.write("</html>");
   res.end()};
 
-server.listen(8080);
+server.listen(process.env.PORT || 8080);
 console.log("Server is listening on 8088");
