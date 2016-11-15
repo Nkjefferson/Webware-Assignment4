@@ -37,19 +37,14 @@ var server = http.createServer (function (req, res) {
         fs.writeFileSync('movies.txt', movies.sort().join('\n'))
         p = ''
         return sendIndex(res, movies)
-      }else{
-          return null
-      }
-      
-  })
+      }else{ 
 
   console.log("I'm here" + uri.pathname);
   switch( uri.pathname ) {
     // Note the new case handling search
     case '/search':
-      if(p == ''){
-       // handleSearch(res, uri)
-      }
+      handleSearch(res, uri)
+      
       break
     // Note we no longer have an index.html file, but we handle the cases since that's what the browser will request
     case '/':
@@ -70,6 +65,8 @@ var server = http.createServer (function (req, res) {
     default:
       res.end('404 not found')
   }
+      }
+  })
 
 });
 
