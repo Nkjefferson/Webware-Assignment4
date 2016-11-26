@@ -42,7 +42,7 @@ function populate() {
   function reqListener () {
     var tmplist = this.responseText.split(',')
     console.log( tmplist )
-    getMyList()
+    
   }
   
   var oReq = new XMLHttpRequest();
@@ -54,6 +54,12 @@ function populate() {
 
   oReq.open("POST", "/updateMovie", true);
 
+  oReq.onreadystatechange = function() {
+       if (oReq.readyState == 4 && oReq.status == 200) {
+          console.log('Ready')
+          getMyList()
+       }
+    }
   // MAJOR KEY-- build form in XML http request SEND function
   oReq.send('add='+movie.value)
 
@@ -76,7 +82,6 @@ function remove(mov){
   function reqListener () {
     var tmplist = this.responseText.split(',')
     console.log( tmplist )
-    getMyList()
     
   }
   var oReq = new XMLHttpRequest();
@@ -85,6 +90,12 @@ function remove(mov){
 
   oReq.open("POST", "/updateMovie", true);
 
+  oReq.onreadystatechange = function() {
+       if (oReq.readyState == 4 && oReq.status == 200) {
+          console.log('Ready')
+          getMyList()
+       }
+    }
   oReq.send('rem=' +mov)
 
 
