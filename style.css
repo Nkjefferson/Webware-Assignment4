@@ -13,11 +13,10 @@ body, html
     background-size: 100% 100%;
     background-repeat: no-repeat;
     margin-top:3rem;
-    color:white;
 }
 
-.jumbotron form{
-    color:black;
+.jumbotron h1{
+    color:white;
 
 }
 

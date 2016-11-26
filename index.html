@@ -1,0 +1,129 @@
+<html>
+
+<head>
+  <script src="https://use.fontawesome.com/53cba9084c.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head> 
+  <body OnLoad="document.myform.search.focus();">
+    <div class="container-fluid">
+      <div class="jumbotron">
+      <h1>Movie Search</h1>
+        <div class="input-group">
+          <form name="myform" onSubmit="return false;">
+            <input type="Search" placeholder="Search..." id='search' name="search" />
+            <button class="btn btn-default" type="submit" onclick="getSearchList();document.getElementById('search').value = '';"><i class="fa fa-search" ></i></button>
+          </form>
+
+          <form onSubmit="return false;">
+            <input type="Append" placeholder="Add a Move Title?" id='add' />
+            <button class="btn btn-default"  type="submit" onclick="populate();document.getElementById('add').value = '';"><i class="fa fa-plus" ></i></button>
+          </form>
+        </div>
+      </div>
+    <div class="element">
+      <div class="container">
+     
+        <div id="movies"> </div>
+      </div>
+    </div>
+    </div>
+ 
+  </body>
+
+<script>
+
+getMyList()
+// HOW CAN WE ?UPDATE THIS ON ELSEWHERE
+
+function populate() {
+  var movie = document.getElementById('add')
+
+  function reqListener () {
+    getMyList()
+    console.log("adding" +movie.value)
+  }
+  
+  var oReq = new XMLHttpRequest();
+
+//  oReq.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  
+  // defining behavior for when the response comes back to us
+  oReq.addEventListener("load", reqListener);
+
+  oReq.open("POST", "/updateMovie", true);
+
+  // MAJOR KEY-- build form in XML http request SEND function
+  oReq.send('add='+movie.value)
+
+
+}
+
+// TODO start here
+// build a list of classes from an array
+function buildList( lit ) { // aka list
+  var list = document.getElementById('movies')
+  list.innerHTML = "<div class='list-group'>";
+  // for each class in 'lit', add a paragraph tag + class name
+  lit.forEach(function(cl) {
+    list.innerHTML += '<a href="#" class="list-group-item">'+cl+'<span class="del"><button class="btn btn-default" onclick="remove(\'' + cl+ '\');getMyList();" name="rem"><i class="fa fa-times" aria-hidden="true"></i></span></button></a></div>';
+  })
+}
+
+function remove(mov){
+
+  function reqListener () {
+    console.log("remove " + mov) 
+  }
+  var oReq = new XMLHttpRequest();
+
+  oReq.addEventListener("load", reqListener);
+
+  oReq.open("POST", "/updateMovie", true);
+
+  oReq.send('rem=' +mov)
+
+
+}
+
+function getMyList() {
+
+  function reqListener () {
+    var tmplist = this.responseText.split(',');
+    console.log( tmplist )
+    buildList( tmplist )
+  }
+  
+  var oReq = new XMLHttpRequest();
+  
+  // defining behavior for when the response comes back to us
+  oReq.addEventListener("load", reqListener);
+
+  oReq.open("GET", "/movies");
+  oReq.send();
+
+}
+
+function getSearchList() {
+  var srch = document.getElementById('search')
+
+  function reqListener () {
+    var tmplist = this.responseText.split(',');
+    console.log(srch.value)
+    console.log( tmplist )
+    buildList( tmplist )
+  }
+  
+  var oReq = new XMLHttpRequest();
+  
+  // defining behavior for when the response comes back to us
+  oReq.addEventListener("load", reqListener);
+
+  oReq.open("GET", "/search?search=" +srch.value);
+  oReq.send();
+
+}
+
+</script>
+
+</html>
