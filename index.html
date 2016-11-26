@@ -73,7 +73,9 @@ function buildList( lit ) { // aka list
 function remove(mov){
 
   function reqListener () {
-    console.log("remove " + mov) 
+    var tmplist = this.responseText.split(',');
+    console.log( tmplist )
+    buildList( tmplist )
   }
   var oReq = new XMLHttpRequest();
 

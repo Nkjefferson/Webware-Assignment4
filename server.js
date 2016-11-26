@@ -42,7 +42,7 @@ var server = http.createServer (function (req, res) {
       break
     case '/updateMovie':
       
-      res.end(handlePost(req))
+      res.end(handlePost(req).toString())
       break
     case '/search':
       
@@ -100,6 +100,7 @@ function handlePost(req) {
   }
 
 }) 
+  return movies
 }
 
 // Note: consider this your "index.html" for this assignment
