@@ -40,8 +40,9 @@ function populate() {
   var movie = document.getElementById('add')
 
   function reqListener () {
+    var tmplist = this.responseText.split(',')
+    console.log( tmplist )
     getMyList()
-    console.log("adding" +movie.value)
   }
   
   var oReq = new XMLHttpRequest();
@@ -66,16 +67,17 @@ function buildList( lit ) { // aka list
   list.innerHTML = "<div class='list-group'>";
   // for each class in 'lit', add a paragraph tag + class name
   lit.forEach(function(cl) {
-    list.innerHTML += '<a href="#" class="list-group-item">'+cl+'<span class="del"><button class="btn btn-default" onclick="remove(\'' + cl+ '\');getMyList();" name="rem"><i class="fa fa-times" aria-hidden="true"></i></span></button></a></div>';
+    list.innerHTML += '<a href="#" class="list-group-item">'+cl+'<span class="del"><button class="btn btn-default" onclick="remove(\'' + cl+ '\');" name="rem"><i class="fa fa-times" aria-hidden="true"></i></span></button></a></div>';
   })
 }
 
 function remove(mov){
 
   function reqListener () {
-    var tmplist = this.responseText.split(',');
+    var tmplist = this.responseText.split(',')
     console.log( tmplist )
-    buildList( tmplist )
+    getMyList()
+    
   }
   var oReq = new XMLHttpRequest();
 
