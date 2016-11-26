@@ -41,8 +41,8 @@ var server = http.createServer (function (req, res) {
       res.end(movies.toString())
       break
     case '/updateMovie':
-      handlePost(req)
-      res.end()
+      
+      res.end(handlePost(req))
       break
     case '/search':
       
