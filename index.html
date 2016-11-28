@@ -119,8 +119,16 @@ function getMyList() {
 
 }
 
+
+var srch = document.getElementById('search')
+
+srch.addEventListener(
+  'keyup',
+  function(){
+    getSearchList()
+  })
+
 function getSearchList() {
-  var srch = document.getElementById('search')
 
   function reqListener () {
     var tmplist = this.responseText.split(',');

@@ -64,7 +64,7 @@ function handleSearch(uri) {
   if(uri.query) {
     // PROCESS THIS QUERY TO FILTER MOVIES ARRAY BASED ON THE USER INPUT
     var results = []
-    var term = uri.query.substring(7,uri.query.length).toLowerCase().replace("+", " ");
+    var term = uri.query.substring(7,uri.query.length).toLowerCase().replace(/%20/g, " ");
     for(var i = 0; i < movies.length; i++){
        if(movies[i].toLowerCase().indexOf(term) > -1){
            results.push(movies[i])
