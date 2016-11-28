@@ -41,8 +41,7 @@ var server = http.createServer (function (req, res) {
       res.end(movies.toString())
       break
     case '/updateMovie':
-      
-      res.end(handlePost(req).toString())
+      handlePost(req, res);
       break
     case '/search':
       
@@ -75,7 +74,7 @@ function handleSearch(uri) {
   } 
 };
 
-function handlePost(req) {
+function handlePost(req, res) {
   var body = ''
 
   req.on('data', function(d) {
@@ -95,12 +94,12 @@ function handlePost(req) {
           }
         }
         fs.writeFileSync('movies.txt', movies.sort().join('\n'))
+        res.end(movies.toString());
 
 
   }
 
 }) 
-  return movies
 }
 
 // Note: consider this your "index.html" for this assignment
@@ -120,5 +119,3 @@ function sendFile(res, filename, contentType) {
   })
 
 }
-
-
