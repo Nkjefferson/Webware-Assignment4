@@ -1,6 +1,6 @@
-Assignment 4 - Persistence
+Assignment 5 - AJAX
 ===
 
 Achievements
 
-My techincal achievements for this assignment include, maintianing a functioning search with the ability to preform quick queries without having to refocus the search box. I also redesigned the table so that it would highlight as the user scrolled down it. This makes it easier to match the post BUTTON that I have for each entry to save the user time from having to enter in the name of the movie correctly. I also deployed this app on heroku using github so that I can take this website open source if I would like to.
+My techincal achievements for this assignment include, responsive search functionality, as you type the search is narrowed and automatically performs the search for you. I have also maintained all my persistance functionality when recreating the add and delete methods.
