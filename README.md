@@ -1,6 +1,15 @@
-Assignment 5 - AJAX
+Assignment 6 - Events
 ===
 
 Achievements
 
-My techincal achievements for this assignment include, responsive search functionality, as you type the search is narrowed and automatically performs the search for you. I have also maintained all my persistance functionality when recreating the add and delete methods.
+I created an evenly spacing list as the start of a movie roll animation
+
+I know the movie search is getting repetative but it was already fitted to cohesively do most of the specified tasks.
+
+Event types:
+	scroll
+	click
+	mouseenter
+	keyup
+	dblclick
